@@ -12,10 +12,20 @@ Follow logs with
 sudo docker-compose logs --follow
 ```
 
-## Python Tests
+## Python Debugging
 
-python -m venv .\myenv
+Create Virtual Environment for vscode. This can also be done in vsCode IDE
 
+```
+python -m venv .venv
+```
+
+Debug locally using python 3.10 using the .vscode launch.json file. Options available
+1. Python: Debug Exporter" - for local debugging without using going through Docker
+   - For this option though you will need to comment out sqexporter from docker-compose.yml file
+     and use: "targets: ['host.docker.internal:9120']" instead of  "targets: ['sqexporter:9120']"
+      
+2. Remote Debugging: ... TO DO
 
 ## Jave Unit Tests
 After starting up SonarQube, register the project as "junit-mockito-spring-boot"

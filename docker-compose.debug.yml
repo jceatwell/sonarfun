@@ -2,8 +2,7 @@ version: "3"
 
 services:
 
-  fusionservice:
-    image: fusionservice:latest
+  sqexporter:
     expose:
       - "5678"
     ports:
