@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+
+  fusionservice:
+    image: fusionservice:latest
+    expose:
+      - "5678"
+    ports:
+      - "5678:5678"
+    entrypoint:
+      - "/bin/sh"
+      - -ecx
+      - |
+          pip install ptvsd==4.3.2 --user && \
+          python debug.py runserver 0.0.0.0:8000 --nothreading --noreload

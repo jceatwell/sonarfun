@@ -1,0 +1,45 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "docker-build",
+            "label": "Docker: Run Build",
+            "platform": "python",
+            "dockerBuild": {
+                "tag": "fusionservice:latest",
+                "dockerfile": "${workspaceFolder}/Dockerfile",
+                "context": "${workspaceFolder}",
+                "pull": true
+            },
+            "group": "build"
+        },
+        // Run this task before trying to debug.
+        {
+            "label": "DockerCompose: Ready for Debug",
+            "type": "shell",
+            "command": "docker-compose -f docker-compose.yml -f docker-compose.debug.yml up --abort-on-container-exit",
+            "isBackground": false,
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "problemMatcher": [],
+            "group": "build"
+        },
+        // To debug Unit tests use "import ipdb; ipdb.set_trace(context=10)" in code where
+        // you wish to put a breakpoint. Open a seperate terminal and run "docker attach fusiongateway" to
+        // attach to live running container (You might need to hit enter twice to attach)
+        {
+            "label": "DockerCompose: Run Unit Tests",
+            "type": "shell",
+            "command": "docker-compose -f docker-compose.yml -f docker-compose.test.yml up --abort-on-container-exit",
+            "isBackground": false,
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "problemMatcher": [],
+            "group": "build"
+        }
+    ]
+}
