@@ -51,3 +51,8 @@ The project retrieves all the metrics from SonarQube using the "Web API"
 
 e.g.
 http://localhost:9000/api/measures/component?component=junit-mockito-spring-boot&metricKeys=tests
+
+
+Other inspirations:
+- https://trstringer.com/quick-and-easy-prometheus-exporter/
+- https://matthewzhaocc.com/building-a-custom-prometheus-exporter-in-python-6491d4cdcef3

@@ -2,27 +2,47 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Remote Python App",
+            "name": "Remote Python App (not working)",
             "type": "python",
             "request": "attach",
+            "connect": {
+                "host": "127.0.0.1",
+                "port": 5678
+            },
             "pathMappings": [
                 {
-                    "localRoot": "${workspaceFolder}",
+                    "localRoot": "${workspaceFolder}/sonarqube-prometheus-exporter/core",
                     "remoteRoot": "/core"
                 }
             ],
-            "port": 5678,
-            "host": "127.0.0.1",
-            "django": true
+            "logToFile": true,
         },
         {
-            "name": "Python: Debug Exporter",
+            "name": "Python: Debug Sonar Exporter",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/sonarqube-prometheus-exporter/core/prometheus_exporter.py",
             "console": "integratedTerminal",
             "justMyCode": false,
             "envFile": "${workspaceFolder}/sonarqube-prometheus-exporter/dev.env"
+        },
+        {
+            "name": "Python: Debug custom-exporter Simple",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/custom-exporter/exporter-simple.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": "${workspaceFolder}/custom-exporter/dev.env"
+        },
+        {
+            "name": "Python: Debug custom-exporter Moduler",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/custom-exporter/exporter-moduler.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": "${workspaceFolder}/custom-exporter/vscode_debug.env"
         }
     ]
 }

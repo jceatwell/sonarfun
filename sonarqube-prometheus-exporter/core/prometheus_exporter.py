@@ -39,10 +39,13 @@ class CustomSonarExporter:
                 )
                 yield gauge
 
-if __name__ == "__main__":
+def main():
     custom_exporter = CustomSonarExporter()
     prom.REGISTRY.register(custom_exporter)
     prom.start_http_server(9120)
 
     while True:
         time.sleep(2)
+
+if __name__ == "__main__":
+    main()

@@ -3,13 +3,27 @@ version: "3"
 services:
 
   sqexporter:
+    image: sonarqube-prometheus-exporter:latest
+    container_name: sqexporter
+    depends_on:
+     - sonarqubedb
+     - sonarqube
+     - prometheus
+     - grafana
     expose:
       - "5678"
     ports:
       - "5678:5678"
+      - "9120:9120"      
+    volumes:
+      - .\sonarqube-prometheus-exporter\core:/core
+    environment:
+      - SONAR_URL=http://sonarqube:9000
+      - SONAR_USER=admin
+      - SONAR_PASSWORD=newAdminPassword      
     entrypoint:
       - "/bin/sh"
       - -ecx
       - |
-          pip install ptvsd==4.3.2 --user && \
-          python debug.py runserver 0.0.0.0:8000 --nothreading --noreload
+        python -m pip install debugpy==1.6.6 && \
+        python -m debugpy --listen 5678 --wait-for-client core/prometheus_exporter.py
